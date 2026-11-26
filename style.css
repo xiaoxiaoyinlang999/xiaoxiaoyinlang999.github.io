@@ -36,6 +36,11 @@
   --ease-out: cubic-bezier(0.2, 0.7, 0.3, 1);
   --measure: 62ch;
   --container: 1120px;
+  --bg-video-opacity: 0.66;
+  --bg-veil: linear-gradient(180deg,
+    color-mix(in oklab, var(--color-paper) 90%, transparent) 0%,
+    color-mix(in oklab, var(--color-paper) 58%, transparent) 42%,
+    color-mix(in oklab, var(--color-paper) 92%, transparent) 100%);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -43,13 +48,36 @@ html, body { overflow-x: clip; }
 html { background: var(--color-paper); }
 body {
   margin: 0;
-  background: var(--color-paper);
+  background: transparent;
   color: var(--color-ink-2);
   font-family: var(--font-body);
   font-size: 17px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
+/* 背景视频层：固定在视口底部，内容浮在其上 */
+.bg-video {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  opacity: var(--bg-video-opacity);
+  pointer-events: none;
+}
+.bg-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: var(--bg-veil);
+  pointer-events: none;
+}
+body > :not(.bg-video):not(.bg-veil) {
+  position: relative;
+  z-index: 1;
+}
+
 img { display: block; max-width: 100%; }
 a { color: var(--color-ink); text-decoration: none; }
 a:focus-visible, button:focus-visible {
@@ -62,6 +90,8 @@ a:focus-visible, button:focus-visible {
 html { scrollbar-color: var(--color-rule) var(--color-paper); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
+  .bg-video, .bg-veil { display: none; }
+  body { background: var(--color-paper); }
 }
 
 h1, h2, h3 { font-family: var(--font-body); font-weight: 900; letter-spacing: -0.02em; line-height: 1; color: var(--color-ink); margin: 0; overflow-wrap: break-word; min-width: 0; text-wrap: balance; }
