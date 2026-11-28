@@ -9,6 +9,14 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Chivo:wght@400;700;900&family=Silkscreen:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<script type="importmap">
+{
+  "imports": {
+    "three": "./assets/three.module.min.js",
+    "three/addons/": "./assets/"
+  }
+}
+</script>
 </head>
 <body>
 
@@ -110,6 +118,17 @@
   </div>
 </section>
 
+<section class="section container" id="figure" aria-label="手办展示">
+  <div class="section-head">
+    <h2>本体</h2>
+    <p>拿不到合法身份的那种生物，先给自己捏了个手办。</p>
+  </div>
+  <div class="ducky-stage" id="ducky-stage">
+    <canvas id="ducky-gl" aria-hidden="true"></canvas>
+    <p class="ducky-note">本体加载中。</p>
+  </div>
+</section>
+
 <section class="statement">
   <div class="container">
     <p>Game over 是别人的台词。</p>
@@ -125,5 +144,7 @@
 </footer>
 
 <script type="module" src="assets/webgl-hero.js"></script>
+<script type="module" src="assets/crt-shot.js"></script>
+<script type="module" src="assets/ducky-view.js"></script>
 </body>
 </html>
